@@ -19,13 +19,29 @@ const BookSeatNo = () => {
       setSelectedSeats(JSON.parse(storedSelectedSeats));
     }
 
+    
+
     const timeoutId = setTimeout(() => {
       setSelectedSeats([]);
     }, 3 * 60 * 60 * 1000); 
 
+ 
+
     
     return () => clearTimeout(timeoutId);
   }, []);
+
+  useEffect(()=>{
+    const userfind = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (userfind?.email) {
+       return
+    }
+    else {
+      alert('Login first')
+        window.location.href = '/login'
+    }
+  },[])
 
   const handleSeatClick = (seat) => {
     if (!canChangeSeats) {
